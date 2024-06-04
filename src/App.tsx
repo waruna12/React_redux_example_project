@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { StateType, decrementNumber, incrementNumber } from './store/reducer/number';
 
 function App() {
+
+  const number = useSelector((store: StateType) => store.number)
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{number}</h1>
+      <div>
+        <button onClick={() => {
+          dispatch(incrementNumber(1000))
+        }}>Increment</button>
+        <button onClick={() => {
+          dispatch(decrementNumber(50))
+        }}>Decrement</button>
+      </div>
     </div>
   );
 }
